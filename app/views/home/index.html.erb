@@ -1,0 +1,93 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    ShopifyApp.ready(function(){
+      ShopifyApp.Bar.initialize({
+        title: "Home",
+        icon: "<%= asset_path('favicon.ico') %>"
+      });
+    });
+  </script>
+<% end %>
+
+<h1>You shouldn't have come here, Brian...  Turn back.</h1>
+<h2>First 10 Products</h2>
+
+<ul>
+  <% @products.each do |product| %>
+    <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
+  <% end %>
+</ul>
+</br>
+</br>
+
+<ul>
+  <% @users.each do |user| %>
+    <li><%= user.first_name %> <%= user.last_name %></li>
+  <% end %>
+</ul>
+
+<br>
+
+
+<div>
+  <%= form_for(:form, :url => {:action => 'create'}) do |f| %>
+  <table>
+    <tr>
+      <td><%= f.label(:firstname, "First Name") %></td>
+      <td><%= f.text_field(:first_name) %></td>
+    </tr>
+    <tr>
+      <td><%= f.label(:lastname, "Last Name") %></td>
+      <td><%= f.text_field(:last_name) %></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><%= submit_tag("Submit") %></td>
+    </tr>
+  </table>
+  <% end %>
+</div> 
+
+<br>
+
+<h1>Doujinshi Titles</h1>
+
+<ul>
+  <% @doujinshis.each do |doujinshi| %>
+    <li><%= doujinshi.title %></li>
+  <% end %>
+</ul>
+
+
+
+
+<br>
+<br>
+<h2>Add a Doujinshi Title</h2>
+
+<div>
+  <%= form_for(:doujinshi, :url => {:action => 'd_create'}) do |f| %>
+  <table>
+    <tr>
+      <td><%= f.label(:title, "Title") %></td>
+      <td><%= f.text_field(:title) %></td>
+      <!--<td><%= f.select :title, Doujinshi.all.collect {|x| [ x.title ] }, { :include_blank => true } %><td> -->
+    <!--  <td><%= f.select(:title, (@doujinshis[0].title..@doujinshis[@doujinshi_count].title).collect { |n| [n] }) %></td>  -->
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><%= submit_tag("Submit") %></td>
+    </tr>
+  </table>
+  <% end %> 
+</div>
+
+
+<%= link_to("Manage Doujinshi Titles", {:controller => 'titles', :action => 'index'}, :class => 'home-nav') %>
+</br>
+<%= link_to(" Manage Customers", {:controller => 'customers', :action => 'index'}, :class => 'home-nav') %>
+</br>
+<%= link_to(" Manage Orders", {:controller => 'orders', :action => 'index'}, :class => 'home-nav') %>
+
+
+</br></br></br></br>
