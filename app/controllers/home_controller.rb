@@ -5,12 +5,10 @@ class HomeController < ShopifyApp::AuthenticatedController
   	#if params[:id]
     #	redirect_to "https://www.emanga.com"
    # else	
-=begin
    		 @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
        @users = Form.all
        @doujinshis = Doujinshi.all
        @doujinshi_count = Doujinshi.count - 1
-=end    
   #	end
      
      #filename = File.join(Rails.root, "/public/signup.html")
